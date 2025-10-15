@@ -4,12 +4,8 @@
 import { Router, Request, Response } from 'express';
 import { PriceAggregator } from '../services/aggregator';
 import { logger } from '../utils/logger';
-import axios from 'axios';
 
 const router = Router();
-
-// Pi Network Horizon API
-const HORIZON_API = 'https://api.mainnet.minepi.com';
 
 export function createPiDataRouter(aggregator: PriceAggregator): Router {
   /**
