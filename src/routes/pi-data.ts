@@ -94,6 +94,142 @@ export function createPiDataRouter(aggregator: PriceAggregator): Router {
     }
   });
 
+  /**
+   * GET /top-accounts
+   * Get top Pi accounts by balance
+   */
+  router.get('/top-accounts', async (_req: Request, res: Response) => {
+    try {
+      // TODO: Fetch from blockchain data when available
+      res.json({
+        accounts: [],
+        total: 0,
+        message: 'Top accounts data not yet available'
+      });
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      logger.error('Error fetching top accounts', { error: errorMessage });
+      res.json({
+        accounts: [],
+        total: 0,
+        error: errorMessage
+      });
+    }
+  });
+
+  /**
+   * GET /accounts/distribution
+   * Get account distribution statistics
+   */
+  router.get('/accounts/distribution', async (_req: Request, res: Response) => {
+    try {
+      // TODO: Calculate from blockchain data when available
+      res.json({
+        distribution: [],
+        total_accounts: 0,
+        message: 'Account distribution data not yet available'
+      });
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      logger.error('Error fetching account distribution', { error: errorMessage });
+      res.json({
+        distribution: [],
+        total_accounts: 0,
+        error: errorMessage
+      });
+    }
+  });
+
+  /**
+   * GET /data/unlocknext30d
+   * Get Pi unlock data for next 30 days
+   */
+  router.get('/data/unlocknext30d', async (_req: Request, res: Response) => {
+    try {
+      // TODO: Calculate from blockchain data when available
+      res.json({
+        unlocks: [],
+        total_unlock: 0,
+        message: 'Unlock data not yet available'
+      });
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      logger.error('Error fetching unlock data', { error: errorMessage });
+      res.json({
+        unlocks: [],
+        total_unlock: 0,
+        error: errorMessage
+      });
+    }
+  });
+
+  /**
+   * GET /data/unlockfull
+   * Get full unlock statistics
+   */
+  router.get('/data/unlockfull', async (_req: Request, res: Response) => {
+    try {
+      // TODO: Calculate from blockchain data when available
+      res.json({
+        statistics: {},
+        message: 'Full unlock statistics not yet available'
+      });
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      logger.error('Error fetching unlock statistics', { error: errorMessage });
+      res.json({
+        statistics: {},
+        error: errorMessage
+      });
+    }
+  });
+
+  /**
+   * GET /data/nodemap
+   * Get Pi node map data
+   */
+  router.get('/data/nodemap', async (_req: Request, res: Response) => {
+    try {
+      // TODO: Fetch from blockchain data when available
+      res.json({
+        nodes: [],
+        total_nodes: 0,
+        message: 'Node map data not yet available'
+      });
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      logger.error('Error fetching node map', { error: errorMessage });
+      res.json({
+        nodes: [],
+        total_nodes: 0,
+        error: errorMessage
+      });
+    }
+  });
+
+  /**
+   * GET /transactions
+   * Get recent Pi transactions
+   */
+  router.get('/transactions', async (_req: Request, res: Response) => {
+    try {
+      // TODO: Fetch from blockchain data when available
+      res.json({
+        transactions: [],
+        total: 0,
+        message: 'Transaction data not yet available'
+      });
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      logger.error('Error fetching transactions', { error: errorMessage });
+      res.json({
+        transactions: [],
+        total: 0,
+        error: errorMessage
+      });
+    }
+  });
+
   return router;
 }
 

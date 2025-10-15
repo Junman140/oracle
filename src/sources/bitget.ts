@@ -48,8 +48,8 @@ export class BitgetSource extends PriceSource {
         source: this.name,
         weight: this.weight,
       };
-    } catch (error: any) {
-      const errorMessage = error.response?.data?.msg || error.message;
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       this.recordError(errorMessage);
       logger.error('Bitget fetch error', { 
         error: errorMessage,
