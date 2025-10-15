@@ -48,7 +48,7 @@ export function createPiDataRouter(aggregator: PriceAggregator): Router {
     try {
       // This would need to be calculated from blockchain data
       // For now, return structure that matches piscan.io
-      const response = await axios.get(`${HORIZON_API}`);
+      // const horizonData = await axios.get(`${HORIZON_API}`);
       
       res.json({
         total_circulating_supply: 0,
