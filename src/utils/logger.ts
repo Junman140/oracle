@@ -1,5 +1,6 @@
 /**
  * Winston logger configuration
+ * Serverless-compatible (no file logging in production)
  */
 import winston from 'winston';
 import { config } from '../config';
@@ -23,26 +24,39 @@ const consoleFormat = winston.format.combine(
   })
 );
 
+// Configure transports based on environment
+const transports: winston.transport[] = [
+  new winston.transports.Console({
+    format: consoleFormat,
+  }),
+];
+
+// Only add file logging in development (not in serverless/Vercel)
+if (config.nodeEnv === 'development') {
+  try {
+    const fs = require('fs');
+    if (!fs.existsSync('logs')) {
+      fs.mkdirSync('logs');
+    }
+    
+    transports.push(
+      new winston.transports.File({
+        filename: 'logs/error.log',
+        level: 'error',
+      }),
+      new winston.transports.File({
+        filename: 'logs/combined.log',
+      })
+    );
+  } catch (error) {
+    // Silently ignore file logging errors (e.g., in read-only filesystems)
+    console.warn('File logging disabled (read-only filesystem)');
+  }
+}
+
 export const logger = winston.createLogger({
   level: config.logLevel,
   format: logFormat,
-  transports: [
-    new winston.transports.Console({
-      format: consoleFormat,
-    }),
-    new winston.transports.File({
-      filename: 'logs/error.log',
-      level: 'error',
-    }),
-    new winston.transports.File({
-      filename: 'logs/combined.log',
-    }),
-  ],
+  transports,
 });
-
-// Create logs directory if it doesn't exist
-import fs from 'fs';
-if (!fs.existsSync('logs')) {
-  fs.mkdirSync('logs');
-}
 
